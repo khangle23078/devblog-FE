@@ -1,9 +1,12 @@
-import {App} from "antd";
+/* eslint-disable react-refresh/only-export-components */
 import {createBrowserRouter} from "react-router-dom";
+import {lazy} from "react";
+
+const Login = lazy(() => import("./../pages/auth/Login"));
 
 export const router = createBrowserRouter([
   {
-    path: "",
-    element: <App />,
+    path: "/login",
+    element: <Login />,
   },
 ]);
