@@ -3,7 +3,6 @@ import {
   DesktopOutlined,
   FileOutlined,
   PieChartOutlined,
-  TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import type {MenuProps} from "antd";
@@ -29,18 +28,16 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem("Option 1", "1", <PieChartOutlined />),
-  getItem("Option 2", "2", <DesktopOutlined />),
-  getItem("User", "sub1", <UserOutlined />, [
-    getItem("Tom", "3"),
-    getItem("Bill", "4"),
-    getItem("Alex", "5"),
+  getItem("Dashboard", "1", <PieChartOutlined />),
+  getItem("Danh mục", "2", <DesktopOutlined />, [
+    getItem(<a href="/admin/category">Danh sách danh mục</a>, "3"),
+    getItem("Thêm mới danh mục", "4"),
   ]),
-  getItem("Team", "sub2", <TeamOutlined />, [
-    getItem("Team 1", "6"),
-    getItem("Team 2", "8"),
+  getItem("Bài viết", "sub1", <FileOutlined />, [
+    getItem("Danh sách bài viết", "5"),
+    getItem("Thêm mới bài viết", "6"),
   ]),
-  getItem("Files", "9", <FileOutlined />),
+  getItem("Tài khoản", "9", <UserOutlined />),
 ];
 
 const AdminLayout: React.FC = () => {
@@ -74,11 +71,7 @@ const AdminLayout: React.FC = () => {
             <Breadcrumb.Item>User</Breadcrumb.Item>
             <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
-          <div
-            style={{padding: 24, minHeight: 360, background: colorBgContainer}}>
-            Bill is a cat.
-            <Outlet />
-          </div>
+          <Outlet />
         </Content>
         <Footer style={{textAlign: "center"}}>
           Ant Design ©2023 Created by Ant UED

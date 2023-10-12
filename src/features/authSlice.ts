@@ -1,14 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {authApi} from "../app/services/auth";
 
 interface AuthState {
-  user: string | null;
+  email: string | null;
   token: string | null;
   isAuthentication: boolean;
 }
 
 const initialState = {
-  user: null,
+  email: null,
   token: null,
   role: null,
   isAuthentication: false,
@@ -17,19 +16,17 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      authApi.endpoints.login.matchFulfilled,
-      (state, {payload}) => {
-        state.user = payload.data.user;
-        state.token = payload.data.token;
-        JSON.stringify(
-          localStorage.setItem("user", JSON.stringify(payload.data))
-        );
-      }
-    );
+  reducers: {
+    setCredentials: (state, {payload}) => {
+      const data = payload.data.data;
+      (state.email = data.email),
+        (state.token = data.accessToken),
+        (state.isAuthentication = true);
+      localStorage.setItem("user", JSON.stringify(data));
+    },
   },
 });
+
+export const {setCredentials} = authSlice.actions;
 
 export default authSlice.reducer;

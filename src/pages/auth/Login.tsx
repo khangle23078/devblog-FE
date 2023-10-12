@@ -3,6 +3,9 @@ import {LockOutlined, UserOutlined} from "@ant-design/icons";
 import {Button, Card, Form, Input} from "antd";
 import {useLoginMutation} from "../../app/services/auth";
 import toast from "react-hot-toast/headless";
+import {useDispatch} from "react-redux";
+import {setCredentials} from "../../features/authSlice";
+import {useNavigate} from "react-router-dom";
 
 interface FormTypes {
   email: string;
@@ -10,10 +13,16 @@ interface FormTypes {
 }
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
+  const distpatch = useDispatch();
   const [login] = useLoginMutation();
   const onFinish = async (values: FormTypes) => {
     try {
-      await login(values);
+      const res = await login(values);
+
+      toast.success("Đăng nhập thành công");
+      distpatch(setCredentials(res));
+      navigate("/admin/category");
     } catch (error: unknown) {
       toast.error(error as string);
     }
@@ -33,6 +42,7 @@ const Login: React.FC = () => {
               name="email"
               rules={[{required: true, message: "Vui lòng nhập email"}]}>
               <Input
+                size="large"
                 prefix={<UserOutlined className="site-form-item-icon" />}
                 placeholder="Email"
               />
@@ -41,6 +51,7 @@ const Login: React.FC = () => {
               name="password"
               rules={[{required: true, message: "Vui lòng nhập mật khẩu"}]}>
               <Input
+                size="large"
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
                 placeholder="Mật khẩu"
@@ -49,6 +60,7 @@ const Login: React.FC = () => {
 
             <Form.Item>
               <Button
+                size="large"
                 type="primary"
                 htmlType="submit"
                 className="login-form-button block w-full">

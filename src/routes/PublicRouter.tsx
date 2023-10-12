@@ -6,6 +6,7 @@ const AdminLayout = lazy(() => import("./../layouts/AdminLayout"));
 
 const Login = lazy(() => import("./../pages/auth/Login"));
 const Dashboard = lazy(() => import("./../pages/admin/Dashboard"));
+const CategoryList = lazy(() => import("../pages/admin/category/CategoryList"));
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,15 @@ export const router = createBrowserRouter([
       {
         path: "",
         element: <Dashboard />,
+      },
+      {
+        path: "category",
+        children: [
+          {
+            path: "",
+            element: <CategoryList />,
+          },
+        ],
       },
     ],
   },
