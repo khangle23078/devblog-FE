@@ -16,10 +16,10 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const distpatch = useDispatch();
   const [login] = useLoginMutation();
+
   const onFinish = async (values: FormTypes) => {
     try {
       const res = await login(values);
-
       toast.success("Đăng nhập thành công");
       distpatch(setCredentials(res));
       navigate("/admin/category");
@@ -33,11 +33,7 @@ const Login: React.FC = () => {
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-cyan-400 to blue-500">
         <Card style={{minWidth: "500px"}}>
           <h2 className="text-center py-4">Đăng nhập</h2>
-          <Form
-            name="normal_login"
-            className="login-form"
-            initialValues={{remember: true}}
-            onFinish={onFinish}>
+          <Form name="normal_login" className="login-form" onFinish={onFinish}>
             <Form.Item
               name="email"
               rules={[{required: true, message: "Vui lòng nhập email"}]}>

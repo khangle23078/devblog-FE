@@ -7,6 +7,7 @@ export const categoryApi = api.injectEndpoints({
     getCategories: build.query<API_RESPONSE<Category[]>, void>({
       query: () => "/categories",
     }),
+  
   }),
 });
 

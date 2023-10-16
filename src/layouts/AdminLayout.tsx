@@ -1,44 +1,9 @@
 import React, {useState} from "react";
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import type {MenuProps} from "antd";
 import {Avatar, Breadcrumb, Layout, Menu, theme} from "antd";
 import {Outlet} from "react-router-dom";
+import {adminMenus} from "../configs/AdminMenus";
 
 const {Header, Content, Footer, Sider} = Layout;
-
-type MenuItem = Required<MenuProps>["items"][number];
-
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[]
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  } as MenuItem;
-}
-
-const items: MenuItem[] = [
-  getItem("Dashboard", "1", <PieChartOutlined />),
-  getItem("Danh mục", "2", <DesktopOutlined />, [
-    getItem(<a href="/admin/category">Danh sách danh mục</a>, "3"),
-    getItem("Thêm mới danh mục", "4"),
-  ]),
-  getItem("Bài viết", "sub1", <FileOutlined />, [
-    getItem("Danh sách bài viết", "5"),
-    getItem("Thêm mới bài viết", "6"),
-  ]),
-  getItem("Tài khoản", "9", <UserOutlined />),
-];
 
 const AdminLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -57,7 +22,7 @@ const AdminLayout: React.FC = () => {
           theme="dark"
           defaultSelectedKeys={["1"]}
           mode="inline"
-          items={items}
+          items={adminMenus}
         />
       </Sider>
       <Layout>

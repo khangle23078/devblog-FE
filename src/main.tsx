@@ -12,8 +12,8 @@ import {Toaster} from "react-hot-toast";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
+      <Toaster position="top-right" />
       <Suspense fallback={<Spin />}>
-        <Toaster />
         <RouterProvider router={router} />
       </Suspense>
     </Provider>
