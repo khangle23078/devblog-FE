@@ -15,14 +15,16 @@ interface FormTypes {
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const distpatch = useDispatch();
-  const [login] = useLoginMutation();
+  const [login, {isSuccess}] = useLoginMutation();
 
   const onFinish = async (values: FormTypes) => {
     try {
       const res = await login(values);
-      toast.success("Đăng nhập thành công");
-      distpatch(setCredentials(res));
-      navigate("/admin/category");
+      if (isSuccess) {
+        toast.success("Đăng nhập thành công");
+        distpatch(setCredentials(res));
+        navigate("/admin/category");
+      }
     } catch (error: unknown) {
       toast.error(error as string);
     }

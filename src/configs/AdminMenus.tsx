@@ -7,43 +7,36 @@ import {
 
 export const adminMenus: menuItem[] = [
   {
-    label: "Dashboard",
-    path: "/dashboard",
+    label: <a href="/admin">Danh mục</a>,
     key: "1",
     icon: <PieChartOutlined />,
   },
   {
     label: "Danh mục",
-    path: "/category",
     key: "2",
     icon: <DesktopOutlined />,
     children: [
       {
-        label: "Danh sách danh mục",
-        path: "/category/add",
+        label: <a href="/admin/category">Danh sách</a>,
         key: "3",
       },
       {
-        label: "Thêm mới danh mục",
-        path: "/category/list",
+        label: <a href="/admin/category/add">Thêm mới</a>,
         key: "4",
       },
     ],
   },
   {
     label: "Bài viết",
-    path: "/admin/post",
     key: "5",
     icon: <FileOutlined />,
     children: [
       {
         label: "Danh sách bài viết",
-        path: "/post/list",
         key: "6",
       },
       {
         label: "Thêm mới bài viết",
-        path: "/post/add",
         key: "7",
       },
     ],

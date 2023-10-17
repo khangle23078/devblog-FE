@@ -1,6 +1,5 @@
 export interface menuItem {
-  label: string;
-  path: string;
+  label: React.ReactNode;
   key: string;
   icon?: React.ReactNode;
   children?: menuItem[];
