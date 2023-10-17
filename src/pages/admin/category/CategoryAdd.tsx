@@ -1,6 +1,5 @@
-import {Button, Card, Form, Input} from "antd";
+import {Button, Card, Form, Input, message} from "antd";
 import {useCreateCategoryMutation} from "../../../app/services/category";
-import toast from "react-hot-toast";
 import {Category} from "../../../interfaces/category";
 import {useNavigate} from "react-router-dom";
 
@@ -12,11 +11,11 @@ const CategoryAdd = () => {
     try {
       await addCategory(values);
       if (isSuccess) {
-        toast.success("Thêm mới thành công");
+        message.success("Thêm mới danh mục thành công!");
         navigate("/admin/category");
       }
     } catch (error: unknown) {
-      toast.error(error as string);
+      message.error("Có lỗi xảy ra khi thêm mới!");
     }
   };
 
