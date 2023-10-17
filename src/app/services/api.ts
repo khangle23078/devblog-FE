@@ -1,17 +1,17 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {RootState} from "../store";
 
 export const api = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://new-esport-be.onrender.com/api",
-    prepareHeaders: (headers, {getState}) => {
-      const token = (getState() as RootState).auth.token;
+    prepareHeaders: (headers) => {
+      const token = JSON.parse(
+        localStorage.getItem("user") as string
+      ).accessToken;
 
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
       }
-
       return headers;
     },
   }),

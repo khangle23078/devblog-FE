@@ -8,6 +8,7 @@ const Login = lazy(() => import("./../pages/auth/Login"));
 const Dashboard = lazy(() => import("./../pages/admin/Dashboard"));
 const CategoryList = lazy(() => import("../pages/admin/category/CategoryList"));
 const CategoryAdd = lazy(() => import("../pages/admin/category/CategoryAdd"));
+const NotFound = lazy(() => import("./../pages/NotFound"));
 
 export const router = createBrowserRouter([
   {
@@ -36,5 +37,9 @@ export const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
