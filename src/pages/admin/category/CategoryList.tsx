@@ -1,14 +1,18 @@
 import React from "react";
 import {Button, Card, Space, Table, Typography} from "antd";
-import {useGetCategoriesQuery} from "../../../app/services/category";
+import {
+  useDeleteCategoryMutation,
+  useGetCategoriesQuery,
+} from "../../../app/services/category";
 import {Category} from "../../../interfaces/category";
+import toast from "react-hot-toast";
 
 const {Column} = Table;
 const {Title} = Typography;
 
 const CategoryList: React.FC = () => {
   const {isLoading, data: categories} = useGetCategoriesQuery();
-
+  const [deleteCategory, {isSuccess}] = useDeleteCategoryMutation();
   const dataSource = categories?.data.map(
     (category: Category, index: number) => {
       return {
@@ -18,6 +22,13 @@ const CategoryList: React.FC = () => {
       };
     }
   );
+
+  const handleDeleteCategory = async (id: string) => {
+    await deleteCategory(id);
+    if (isSuccess) {
+      toast.success("Xóa danh mục thành công");
+    }
+  };
 
   console.log(dataSource);
 
@@ -41,9 +52,9 @@ const CategoryList: React.FC = () => {
             <Space size="middle">
               <Button href={`/admin/category/${category._id}`}>Sửa</Button>
               <Button
-                type="primary"
                 danger
-                href={`/admin/category/${category._id}`}>
+                type="primary"
+                onClick={() => handleDeleteCategory(category._id)}>
                 Xóa
               </Button>
             </Space>
