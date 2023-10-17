@@ -1,22 +1,28 @@
 import {Button, Card, Form, Input} from "antd";
-import {useGetCategoryQuery} from "../../../app/services/category";
-import {useParams} from "react-router-dom";
+import {useEditCategoryMutation, useGetCategoryQuery} from "../../../app/services/category";
+import {useNavigate, useParams} from "react-router-dom";
+import toast from "react-hot-toast";
 import {Category} from "../../../interfaces/category";
 
 const CategoryEdit = () => {
   const {id} = useParams();
-  const {data: response} = useGetCategoryQuery(id);
   const [form] = Form.useForm();
+  const {data: response} = useGetCategoryQuery(id);
+  const [editCategory] = useEditCategoryMutation();
+  const navigate = useNavigate();
 
+  console.log(id);
   if (response) {
     const category = response.data;
-    console.log(category);
-
     form.setFieldsValue({name: category.name});
   }
 
-  const onSubmit = (values: Omit<Category, "id">) => {
-    console.log(values);
+  const onSubmit = async (data: Partial<Category>) => {
+    if (id) {
+      await editCategory({id, data});
+      toast.success("Sửa danh mục thành công");
+      navigate("/admin/category");
+    }
   };
 
   return (
