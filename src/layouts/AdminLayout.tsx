@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {UserOutlined} from "@ant-design/icons";
 import {Avatar, Breadcrumb, Layout, Menu, theme} from "antd";
 import {Outlet} from "react-router-dom";
-import {adminMenus} from "../configs/AdminMenus";
+import {adminMenus} from "../configs/AdminMenu";
 
 const {Header, Content, Footer, Sider} = Layout;
 

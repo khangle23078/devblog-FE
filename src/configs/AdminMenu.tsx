@@ -1,9 +1,5 @@
 import {menuItem} from "../interfaces/menu";
-import {
-  PieChartOutlined,
-  DesktopOutlined,
-  FileOutlined,
-} from "@ant-design/icons";
+import {PieChartOutlined, DesktopOutlined, FileOutlined} from "@ant-design/icons";
 
 export const adminMenus: menuItem[] = [
   {
@@ -32,7 +28,7 @@ export const adminMenus: menuItem[] = [
     icon: <FileOutlined />,
     children: [
       {
-        label: "Danh sách bài viết",
+        label: <a href="/admin/post">Danh sách</a>,
         key: "6",
       },
       {

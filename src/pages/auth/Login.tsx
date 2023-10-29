@@ -1,8 +1,7 @@
 import React from "react";
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
-import {Button, Card, Form, Input} from "antd";
+import {Button, Card, Form, Input, message} from "antd";
 import {useLoginMutation} from "../../app/services/auth";
-import toast from "react-hot-toast/headless";
 import {useDispatch} from "react-redux";
 import {setCredentials} from "../../features/authSlice";
 import {useNavigate} from "react-router-dom";
@@ -15,16 +14,18 @@ interface FormTypes {
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const distpatch = useDispatch();
-  const [login] = useLoginMutation();
+  const [login, {isLoading, isSuccess}] = useLoginMutation();
 
   const onFinish = async (values: FormTypes) => {
     try {
       const res = await login(values);
-      toast.success("Đăng nhập thành công");
-      distpatch(setCredentials(res));
-      navigate("/admin/category");
+      if (isSuccess) {
+        message.success("Đăng nhập thành công");
+        distpatch(setCredentials(res));
+        navigate("/admin/category");
+      }
     } catch (error: unknown) {
-      toast.error(error as string);
+      message.error(error as string);
     }
   };
 
@@ -34,9 +35,7 @@ const Login: React.FC = () => {
         <Card style={{minWidth: "500px"}}>
           <h2 className="text-center py-4">Đăng nhập</h2>
           <Form name="normal_login" className="login-form" onFinish={onFinish}>
-            <Form.Item
-              name="email"
-              rules={[{required: true, message: "Vui lòng nhập email"}]}>
+            <Form.Item name="email" rules={[{required: true, message: "Vui lòng nhập email"}]}>
               <Input
                 size="large"
                 prefix={<UserOutlined className="site-form-item-icon" />}
@@ -59,7 +58,8 @@ const Login: React.FC = () => {
                 size="large"
                 type="primary"
                 htmlType="submit"
-                className="login-form-button block w-full">
+                className="login-form-button block w-full"
+                loading={isLoading}>
                 Đăng nhập
               </Button>
               Or

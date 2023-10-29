@@ -9,6 +9,7 @@ const Dashboard = lazy(() => import("./../pages/admin/Dashboard"));
 const CategoryList = lazy(() => import("../pages/admin/category/CategoryList"));
 const CategoryAdd = lazy(() => import("../pages/admin/category/CategoryAdd"));
 const CategoryEdit = lazy(() => import("./../pages/admin/category/CategoryEdit"));
+const PostList = lazy(() => import("./../pages/admin/post/PostList"));
 const NotFound = lazy(() => import("./../pages/NotFound"));
 
 export const router = createBrowserRouter([
@@ -38,6 +39,15 @@ export const router = createBrowserRouter([
           {
             path: "edit/:id",
             element: <CategoryEdit />,
+          },
+        ],
+      },
+      {
+        path: "post",
+        children: [
+          {
+            path: "",
+            element: <PostList />,
           },
         ],
       },
