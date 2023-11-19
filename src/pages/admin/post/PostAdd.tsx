@@ -42,6 +42,8 @@ const PostAdd = () => {
   });
 
   const handlePostAdd = async (data: Partial<Post>) => {
+    console.log(data);
+
     await createPost(data);
     if (isSuccess) {
       message.success("Tạo bài viết thành công");
@@ -94,6 +96,8 @@ const PostAdd = () => {
           getValueFromEvent={(event) => {
             const image = event?.fileList[0]?.response?.file;
             setImageUrl(image);
+            console.log(image?.url);
+
             return image?.url;
           }}>
           <Upload

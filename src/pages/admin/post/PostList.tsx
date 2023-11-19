@@ -7,13 +7,11 @@ const { Title } = Typography;
 
 
 const PostList = () => {
-  const { data: response } = useGetPostsQuery();
-  const [deletePost, { isLoading, isSuccess, isError }] = useDeletePostMutation()
+  const { data: response, isLoading } = useGetPostsQuery();
+  const [deletePost, { isSuccess, isError }] = useDeletePostMutation()
   const handleDeletePost = async (id: string) => {
     await deletePost(id)
-    if (isLoading) {
-      message.loading('Vui lòng chờ')
-    }
+
     if (isSuccess) {
       message.success('Xóa bài viết thành công')
     }
@@ -27,7 +25,7 @@ const PostList = () => {
       id: index + 1,
       _id: post._id,
       title: post.title,
-      thumbnail: post.thumbnail?.url,
+      thumbnail: post.thumbnail,
       category: post.category?.name,
       action: post._id
     }
@@ -50,6 +48,8 @@ const PostList = () => {
       dataIndex: 'thumbnail',
       key: 'thumbnail',
       render: (thumbnail: string) => {
+        console.log(thumbnail);
+
         return <Image src={thumbnail} width={50} height={50} />
       }
     },
@@ -69,7 +69,7 @@ const PostList = () => {
         return <>
           <Space>
             <Button type="dashed">
-              <NavLink to={`/post/edit/${id}`}>Sửa</NavLink>
+              <NavLink to={`/admin/post/edit/${id}`}>Sửa</NavLink>
             </Button>
             <Popconfirm
               title="Xóa bài viết"
@@ -93,7 +93,7 @@ const PostList = () => {
   return (
     <Card>
       <Title level={4}>Danh sách bài viết</Title>
-      <Table columns={columns} dataSource={posts} />
+      <Table columns={columns} dataSource={posts} loading={isLoading} />
     </Card>
   );
 };

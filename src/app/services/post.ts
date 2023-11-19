@@ -16,6 +16,14 @@ export const postApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Post"]
     }),
+    editPost: build.mutation<void, { data: Partial<Post>, _id: string }>({
+      query: ({ data, _id }) => ({
+        url: `/posts/${_id}`,
+        method: "put",
+        body: data
+      }),
+      invalidatesTags: ["Post"]
+    }),
     deletePost: build.mutation<void, string>({
       query: (id) => ({
         url: `/posts/${id}`,
