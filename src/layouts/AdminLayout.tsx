@@ -1,19 +1,19 @@
-import React, {useState} from "react";
-import {UserOutlined} from "@ant-design/icons";
-import {Avatar, Breadcrumb, Layout, Menu, theme} from "antd";
-import {Outlet} from "react-router-dom";
-import {adminMenus} from "../configs/AdminMenu";
+import React, { useState } from "react";
+import { UserOutlined } from "@ant-design/icons";
+import { Avatar, Breadcrumb, Layout, Menu, theme } from "antd";
+import { Outlet } from "react-router-dom";
+import { adminMenus } from "../config/AdminMenu";
 
-const {Header, Content, Footer, Sider} = Layout;
+const { Header, Content, Footer, Sider } = Layout;
 
 const AdminLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
-    token: {colorBgContainer},
+    token: { colorBgContainer },
   } = theme.useToken();
 
   return (
-    <Layout style={{minHeight: "100vh"}}>
+    <Layout style={{ minHeight: "100vh" }}>
       <Sider
         collapsible
         collapsed={collapsed}
@@ -28,18 +28,18 @@ const AdminLayout: React.FC = () => {
       </Sider>
       <Layout>
         <Header
-          style={{padding: 0, background: colorBgContainer}}
-          className="flex justify-end items-center">
+          style={{ padding: 0, background: colorBgContainer }}
+          className="flex items-center justify-end">
           <Avatar icon={<UserOutlined />} className="mr-4" />
         </Header>
-        <Content style={{margin: "0 16px"}}>
-          <Breadcrumb style={{margin: "16px 0"}}>
+        <Content style={{ margin: "0 16px" }}>
+          <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>User</Breadcrumb.Item>
             <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
           <Outlet />
         </Content>
-        <Footer style={{textAlign: "center"}}>
+        <Footer style={{ textAlign: "center" }}>
           Ant Design ©2023 Created by Ant UED
         </Footer>
       </Layout>

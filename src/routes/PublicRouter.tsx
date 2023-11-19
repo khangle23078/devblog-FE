@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
-import {createBrowserRouter} from "react-router-dom";
-import {lazy} from "react";
+import { createBrowserRouter } from "react-router-dom";
+import { lazy } from "react";
 
 const AdminLayout = lazy(() => import("./../layouts/AdminLayout"));
 
@@ -10,6 +10,7 @@ const CategoryList = lazy(() => import("../pages/admin/category/CategoryList"));
 const CategoryAdd = lazy(() => import("../pages/admin/category/CategoryAdd"));
 const CategoryEdit = lazy(() => import("./../pages/admin/category/CategoryEdit"));
 const PostList = lazy(() => import("./../pages/admin/post/PostList"));
+const PostAdd = lazy(() => import("./../pages/admin/post/PostAdd"));
 const NotFound = lazy(() => import("./../pages/NotFound"));
 
 export const router = createBrowserRouter([
@@ -18,39 +19,33 @@ export const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "admin",
+    path: "/admin",
     element: <AdminLayout />,
     children: [
       {
-        path: "",
+        path: "dashboard",
         element: <Dashboard />,
       },
       {
         path: "category",
-        children: [
-          {
-            path: "",
-            element: <CategoryList />,
-          },
-          {
-            path: "add",
-            element: <CategoryAdd />,
-          },
-          {
-            path: "edit/:id",
-            element: <CategoryEdit />,
-          },
-        ],
+        element: <CategoryList />
+      },
+      {
+        path: 'category/add',
+        element: <CategoryAdd />
+      },
+      {
+        path: 'category/edit/:id',
+        element: <CategoryEdit />
       },
       {
         path: "post",
-        children: [
-          {
-            path: "",
-            element: <PostList />,
-          },
-        ],
+        element: <PostList />
       },
+      {
+        path: "post/add",
+        element: <PostAdd />
+      }
     ],
   },
   {

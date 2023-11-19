@@ -1,14 +1,14 @@
-import {Button, Card, Image, Space, Tag, Typography} from "antd";
-import {useGetPostsQuery} from "../../../app/services/post";
-import {Post} from "../../../interfaces/post";
-import {Category} from "../../../interfaces/category";
+import { Button, Card, Image, Space, Tag, Typography } from "antd";
+import { useGetPostsQuery } from "../../../app/services/post";
+import { Post } from "../../../interfaces/post";
 
-const {Title} = Typography;
+const { Title } = Typography;
 
 const PostList = () => {
-  const {data: response} = useGetPostsQuery();
+  const { data: response } = useGetPostsQuery();
 
-  const post = response?.data;
+  const posts = response?.data;
+  console.log(posts);
 
   return (
     <Card>
@@ -35,23 +35,20 @@ const PostList = () => {
             </tr>
           </thead>
           <tbody>
-            {post?.map((post: Post) => {
+            {posts?.map((post: Post, index: number) => {
               return (
                 <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                   <td
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {post._id}
+                    {index + 1}
                   </td>
                   <td className="px-6 py-4">{post.title}</td>
-
                   <td>
                     <Image width={70} height={70} src={post?.thumbnail?.url} />
                   </td>
                   <td>
-                    {post?.category.map((category: Category) => {
-                      return <Tag>{category.name}</Tag>;
-                    })}
+                    <Tag>{post.category?.name}</Tag>
                   </td>
                   <td>
                     <Space>
