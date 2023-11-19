@@ -8,30 +8,39 @@ export const postApi = api.injectEndpoints({
       query: () => "/posts",
       providesTags: ["Post"],
     }),
+    getPost: build.query<API_RESPONSE<Post>, string | undefined>({
+      query: (id) => `/posts/${id}`,
+    }),
     createPost: build.mutation<void, Partial<Post>>({
       query: (data) => ({
         url: `/posts`,
         method: "post",
         body: data,
       }),
-      invalidatesTags: ["Post"]
+      invalidatesTags: ["Post"],
     }),
-    editPost: build.mutation<void, { data: Partial<Post>, _id: string }>({
-      query: ({ data, _id }) => ({
-        url: `/posts/${_id}`,
+    editPost: build.mutation<void, { id: string | undefined; data: Partial<Post> }>({
+      query: (post) => ({
+        url: `/posts/${post.id}`,
         method: "put",
-        body: data
+        body: post.data,
       }),
-      invalidatesTags: ["Post"]
+      invalidatesTags: ["Post"],
     }),
     deletePost: build.mutation<void, string>({
       query: (id) => ({
         url: `/posts/${id}`,
-        method: 'delete',
+        method: "delete",
       }),
-      invalidatesTags: ["Post"]
-    })
+      invalidatesTags: ["Post"],
+    }),
   }),
 });
 
-export const { useGetPostsQuery, useCreatePostMutation, useDeletePostMutation } = postApi;
+export const {
+  useGetPostsQuery,
+  useGetPostQuery,
+  useCreatePostMutation,
+  useEditPostMutation,
+  useDeletePostMutation,
+} = postApi;

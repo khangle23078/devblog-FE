@@ -1,6 +1,6 @@
-import {Category} from "../../interfaces/category";
-import {API_RESPONSE} from "../../interfaces/response";
-import {api} from "./api";
+import { Category } from "../../interfaces/category";
+import { API_RESPONSE } from "../../interfaces/response";
+import { api } from "./api";
 
 export const categoryApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -8,7 +8,7 @@ export const categoryApi = api.injectEndpoints({
       query: () => "/categories",
       providesTags: ["Category"],
     }),
-    getCategory: build.query<API_RESPONSE<Category>, string | undefined>({
+    getCategory: build.query<any, string | undefined>({
       query: (id: string) => `/category/${id}`,
     }),
     createCategory: build.mutation<void, Omit<Category, "id">>({
@@ -19,7 +19,7 @@ export const categoryApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Category"],
     }),
-    editCategory: build.mutation<void, {id: string; data: Partial<Category>}>({
+    editCategory: build.mutation<void, { id: string; data: Partial<Category> }>({
       query: (category) => ({
         url: `/category/${category.id}`,
         method: "put",
