@@ -1,5 +1,5 @@
-import { Button, Card, Image, Space, Table, Tag, Typography } from "antd";
-import { useGetPostsQuery } from "../../../app/services/post";
+import { Button, Card, Image, Popconfirm, Space, Table, Tag, Typography, message } from "antd";
+import { useDeletePostMutation, useGetPostsQuery } from "../../../app/services/post";
 import { Post } from "../../../interfaces/post";
 import { NavLink } from "react-router-dom";
 
@@ -8,6 +8,19 @@ const { Title } = Typography;
 
 const PostList = () => {
   const { data: response } = useGetPostsQuery();
+  const [deletePost, { isLoading, isSuccess, isError }] = useDeletePostMutation()
+  const handleDeletePost = async (id: string) => {
+    await deletePost(id)
+    if (isLoading) {
+      message.loading('Vui lòng chờ')
+    }
+    if (isSuccess) {
+      message.success('Xóa bài viết thành công')
+    }
+    if (isError) {
+      message.error('Có lỗi xảy ra khi xóa bài viết')
+    }
+  }
 
   const posts = response?.data.map((post: Post, index: number) => {
     return {
@@ -15,10 +28,10 @@ const PostList = () => {
       _id: post._id,
       title: post.title,
       thumbnail: post.thumbnail?.url,
-      category: post.category?.name
+      category: post.category?.name,
+      action: post._id
     }
   });
-
   console.log(posts);
 
   const columns = [
@@ -52,18 +65,29 @@ const PostList = () => {
       title: 'Thao tác',
       dataIndex: 'action',
       key: 'action',
-      render: (post: Post) => {
+      render: (id: string) => {
         return <>
           <Space>
             <Button type="dashed">
-              <NavLink to={`/post/edit/${post?._id}`}>Sửa</NavLink>
+              <NavLink to={`/post/edit/${id}`}>Sửa</NavLink>
             </Button>
-            <Button type="primary" danger>Xóa</Button>
+            <Popconfirm
+              title="Xóa bài viết"
+              description="Bạn có chắc muốn xóa không?"
+              onConfirm={() => handleDeletePost(id)}
+              okText="Xóa"
+              cancelText="Không">
+              <Button danger type="primary">
+                Xóa
+              </Button>
+            </Popconfirm>
           </Space>
         </>
       }
     },
   ]
+
+
 
 
   return (

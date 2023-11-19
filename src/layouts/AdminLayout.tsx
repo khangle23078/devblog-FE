@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Breadcrumb, Layout, Menu, theme } from "antd";
+import { Avatar, Layout, Menu, theme } from "antd";
 import { Outlet } from "react-router-dom";
 import { adminMenus } from "../config/AdminMenu";
 
@@ -32,11 +32,7 @@ const AdminLayout: React.FC = () => {
           className="flex items-center justify-end">
           <Avatar icon={<UserOutlined />} className="mr-4" />
         </Header>
-        <Content style={{ margin: "0 16px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
+        <Content style={{ margin: "16px" }}>
           <Outlet />
         </Content>
         <Footer style={{ textAlign: "center" }}>
