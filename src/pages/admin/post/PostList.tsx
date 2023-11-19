@@ -1,71 +1,75 @@
-import { Button, Card, Image, Space, Tag, Typography } from "antd";
+import { Button, Card, Image, Space, Table, Tag, Typography } from "antd";
 import { useGetPostsQuery } from "../../../app/services/post";
 import { Post } from "../../../interfaces/post";
+import { NavLink } from "react-router-dom";
 
 const { Title } = Typography;
+
 
 const PostList = () => {
   const { data: response } = useGetPostsQuery();
 
-  const posts = response?.data;
+  const posts = response?.data.map((post: Post, index: number) => {
+    return {
+      id: index + 1,
+      _id: post._id,
+      title: post.title,
+      thumbnail: post.thumbnail?.url,
+      category: post.category?.name
+    }
+  });
+
   console.log(posts);
+
+  const columns = [
+    {
+      title: 'Id',
+      dataIndex: 'id',
+      key: 'id',
+    },
+    {
+      title: 'Tiêu đề',
+      dataIndex: 'title',
+      key: 'title',
+    },
+    {
+      title: 'Hình ảnh',
+      dataIndex: 'thumbnail',
+      key: 'thumbnail',
+      render: (thumbnail: string) => {
+        return <Image src={thumbnail} width={50} height={50} />
+      }
+    },
+    {
+      title: 'Danh mục',
+      dataIndex: 'category',
+      key: 'category',
+      render: (category: string) => {
+        return <Tag>{category}</Tag>
+      }
+    },
+    {
+      title: 'Thao tác',
+      dataIndex: 'action',
+      key: 'action',
+      render: (post: Post) => {
+        return <>
+          <Space>
+            <Button type="dashed">
+              <NavLink to={`/post/edit/${post?._id}`}>Sửa</NavLink>
+            </Button>
+            <Button type="primary" danger>Xóa</Button>
+          </Space>
+        </>
+      }
+    },
+  ]
+
 
   return (
     <Card>
       <Title level={4}>Danh sách bài viết</Title>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                Id
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Tiêu đề
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Hình ảnh
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Thể loại
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Thao tác
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {posts?.map((post: Post, index: number) => {
-              return (
-                <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                  <td
-                    scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {index + 1}
-                  </td>
-                  <td className="px-6 py-4">{post.title}</td>
-                  <td>
-                    <Image width={70} height={70} src={post?.thumbnail?.url} />
-                  </td>
-                  <td>
-                    <Tag>{post.category?.name}</Tag>
-                  </td>
-                  <td>
-                    <Space>
-                      <Button type="dashed" href={`/admin/category/${post._id}/edit`}>
-                        Sửa
-                      </Button>
-                      <Button type="primary" danger>
-                        Xóa
-                      </Button>
-                    </Space>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+      <Table columns={columns} dataSource={posts} />
     </Card>
   );
 };
