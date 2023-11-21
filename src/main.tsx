@@ -3,11 +3,11 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/PublicRouter.tsx";
 import { Suspense } from "react";
 import { Spin } from "antd";
-import "./styles/style.css";
 import { Provider } from "react-redux";
 import { persistor, store } from "./app/store.ts";
-import "react-quill/dist/quill.snow.css";
 import { PersistGate } from "redux-persist/integration/react";
+import "./styles/style.css";
+import "react-quill/dist/quill.snow.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
