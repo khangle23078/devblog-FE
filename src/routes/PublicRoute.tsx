@@ -3,18 +3,19 @@ import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
 import AdminLayout from "../layouts/AdminLayout";
 import MainLayout from "../layouts/MainLayout";
+import PrivateRoute from "./PrivateRoute";
 
-const HomePage = lazy(() => import("./../pages/client/HomePage"));
-const PostDetail = lazy(() => import("./../pages/client/PostDetail"));
-const Login = lazy(() => import("./../pages/auth/Login"));
-const Dashboard = lazy(() => import("./../pages/admin/Dashboard"));
+const HomePage = lazy(() => import("../pages/client/HomePage"));
+const PostDetail = lazy(() => import("../pages/client/PostDetail"));
+const Login = lazy(() => import("../pages/auth/Login"));
+const Dashboard = lazy(() => import("../pages/admin/Dashboard"));
 const CategoryList = lazy(() => import("../pages/admin/category/CategoryList"));
 const CategoryAdd = lazy(() => import("../pages/admin/category/CategoryAdd"));
-const CategoryEdit = lazy(() => import("./../pages/admin/category/CategoryEdit"));
-const PostList = lazy(() => import("./../pages/admin/post/PostList"));
-const PostAdd = lazy(() => import("./../pages/admin/post/PostAdd"));
-const PostEdit = lazy(() => import("./../pages/admin/post/PostEdit"));
-const NotFound = lazy(() => import("./../pages/NotFound"));
+const CategoryEdit = lazy(() => import("../pages/admin/category/CategoryEdit"));
+const PostList = lazy(() => import("../pages/admin/post/PostList"));
+const PostAdd = lazy(() => import("../pages/admin/post/PostAdd"));
+const PostEdit = lazy(() => import("../pages/admin/post/PostEdit"));
+const NotFound = lazy(() => import("../pages/NotFound"));
 
 export const router = createBrowserRouter([
   {
@@ -40,8 +41,12 @@ export const router = createBrowserRouter([
     element: <AdminLayout />,
     children: [
       {
-        path: "dashboard",
-        element: <Dashboard />,
+        path: "",
+        element:
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+
       },
       {
         path: "category",

@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
-import { router } from "./routes/PublicRouter.tsx";
+import { router } from "./routes/PublicRoute.tsx";
 import { Suspense } from "react";
 import { Spin } from "antd";
 import { Provider } from "react-redux";

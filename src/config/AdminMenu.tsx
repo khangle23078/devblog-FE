@@ -4,7 +4,7 @@ import { PieChartOutlined, DesktopOutlined, FileOutlined } from "@ant-design/ico
 
 export const adminMenus: menuItem[] = [
   {
-    label: <NavLink to="/admin/dashboard">Dashboard</NavLink>,
+    label: <NavLink to="/admin">Dashboard</NavLink>,
     key: "1",
     icon: <PieChartOutlined />,
   },

@@ -12,9 +12,8 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <div className="mt-[30px]">
+    <div className="max-w-[1140px] mx-auto mt-[30px]">
       <h3 className="py-4">Danh sách các bài viết</h3>
-
       <div className="grid gap-8 grid-cols md:grid-cols-2 lg:grid-cols-3">
         {posts?.data ? posts.data.map((post: Post) => {
           return <PostCard post={post} key={post._id} />

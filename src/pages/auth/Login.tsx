@@ -1,4 +1,3 @@
-import React from "react";
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
 import {Button, Card, Form, Input, message} from "antd";
 import {useLoginMutation} from "../../app/services/auth";

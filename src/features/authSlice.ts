@@ -24,7 +24,6 @@ const authSlice = createSlice({
       state.email = data.email
       state.token = data.accessToken
       state.isAuthentication = true
-      localStorage.setItem("user", JSON.stringify(data));
     },
   },
 });
