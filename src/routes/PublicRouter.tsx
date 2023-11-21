@@ -4,7 +4,7 @@ import { lazy } from "react";
 import AdminLayout from "../layouts/AdminLayout";
 import MainLayout from "../layouts/MainLayout";
 
-const HomePage = lazy(() => import("./../pages/client/HomePage"))
+const HomePage = lazy(() => import("./../pages/client/HomePage"));
 const Login = lazy(() => import("./../pages/auth/Login"));
 const Dashboard = lazy(() => import("./../pages/admin/Dashboard"));
 const CategoryList = lazy(() => import("../pages/admin/category/CategoryList"));
