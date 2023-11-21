@@ -1,11 +1,11 @@
 import { Button } from "antd"
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 const Header = () => {
   return (
     <header>
       <main className="flex justify-between">
-        <h1 className="text-lg font-semibold">News esport</h1>
+        <Link to={'/'} className="text-lg font-semibold text-black no-underline">News esport</Link>
         <div className="flex items-center gap-4">
           <nav>
             <ul className="flex gap-4 list-none">

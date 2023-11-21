@@ -5,6 +5,7 @@ import AdminLayout from "../layouts/AdminLayout";
 import MainLayout from "../layouts/MainLayout";
 
 const HomePage = lazy(() => import("./../pages/client/HomePage"));
+const PostDetail = lazy(() => import("./../pages/client/PostDetail"));
 const Login = lazy(() => import("./../pages/auth/Login"));
 const Dashboard = lazy(() => import("./../pages/admin/Dashboard"));
 const CategoryList = lazy(() => import("../pages/admin/category/CategoryList"));
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: '',
         element: <HomePage />
+      },
+      {
+        path: '/post/:id',
+        element: <PostDetail />
       }
     ]
   },
