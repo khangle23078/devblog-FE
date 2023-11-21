@@ -18,6 +18,7 @@ import { Post } from "../../../interfaces/post";
 import { useForm } from "antd/es/form/Form";
 import { useGetCategoriesQuery } from "../../../app/services/category";
 import { Category } from "../../../interfaces/category";
+import TextArea from "antd/es/input/TextArea";
 
 const { Title } = Typography;
 
@@ -41,6 +42,7 @@ const PostEdit = () => {
     form.setFieldsValue({
       title: post.title,
       content: post.content,
+      description: post.description,
       category: post.category,
       thumbnail: post.thumbnail
     })
@@ -71,6 +73,9 @@ const PostEdit = () => {
             modules={editor.modules}
             formats={editor.formats}
           />
+        </Form.Item>
+        <Form.Item label="Mô tả" name="description">
+          <TextArea rows={4} placeholder="Nhập mô tả" />
         </Form.Item>
         <Form.Item
           label="Thể loại"

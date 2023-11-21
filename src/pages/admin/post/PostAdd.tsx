@@ -19,6 +19,7 @@ import { Category } from "../../../interfaces/category";
 import { useDeleteFileMutation } from "../../../app/services/upload";
 import { useAppSelector } from "../../../app/store";
 import { Post } from "../../../interfaces/post";
+import TextArea from "antd/es/input/TextArea";
 
 const { Title } = Typography;
 
@@ -83,6 +84,9 @@ const PostAdd = () => {
             modules={editor.modules}
             formats={editor.formats}
           />
+        </Form.Item>
+        <Form.Item label="Mô tả" name="description">
+          <TextArea rows={4} placeholder="Nhập mô tả" />
         </Form.Item>
         <Form.Item
           label="Thể loại"
