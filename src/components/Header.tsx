@@ -1,11 +1,12 @@
 import { Button } from "antd"
 import { Link, NavLink } from "react-router-dom"
-
 const Header = () => {
   return (
-    <header className="shadow-md">
-      <main className="max-w-[1140px] mx-auto py-4 flex justify-between">
-        <Link to={'/'} className="text-lg font-semibold text-black no-underline">News esport</Link>
+    <header>
+      <main className="max-w-[1216px] mx-auto py-4 flex justify-between">
+        <Link to={'/'} className="text-lg font-semibold text-black no-underline uppercase ">
+          <span className="p-2 text-white rounded-md bg-primary">Dev</span> blog
+        </Link>
         <div className="flex items-center gap-4">
           <nav>
             <ul className="flex gap-4 list-none">
@@ -17,9 +18,9 @@ const Header = () => {
               </li>
             </ul>
           </nav>
-          <Button type="primary">
-            <NavLink to={'/login'}>Đăng nhập</NavLink>
-          </Button>
+          <NavLink to={'/login'}>
+            <Button type="primary" className="bg-primary">Đăng nhập</Button>
+          </NavLink>
         </div>
       </main>
     </header >

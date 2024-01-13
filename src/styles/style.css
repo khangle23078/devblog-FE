@@ -1,10 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Open+Sans:wght@400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-  @apply box-border p-0 m-0;
-  font-family: "Inter", sans-serif;
-  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Work Sans", sans-serif;
+}
+
+.swiper-button-prev {
+  @apply left-0;
+}
+
+.swiper-button-next {
+  color: #000;
 }

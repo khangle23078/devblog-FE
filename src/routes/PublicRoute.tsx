@@ -15,7 +15,7 @@ const CategoryEdit = lazy(() => import("../pages/admin/category/CategoryEdit"));
 const PostList = lazy(() => import("../pages/admin/post/PostList"));
 const PostAdd = lazy(() => import("../pages/admin/post/PostAdd"));
 const PostEdit = lazy(() => import("../pages/admin/post/PostEdit"));
-const NotFound = lazy(() => import("../pages/NotFound"));
+const NotFound = lazy(() => import("../pages/client/NotFound"));
 
 export const router = createBrowserRouter([
   {

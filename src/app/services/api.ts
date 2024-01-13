@@ -4,7 +4,7 @@ import { RootState } from "../store";
 export const api = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://new-esport-be.onrender.com/api",
+    baseUrl: import.meta.env.VITE_API_URL,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
       if (token) {
