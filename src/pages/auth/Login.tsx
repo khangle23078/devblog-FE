@@ -1,9 +1,9 @@
-import {LockOutlined, UserOutlined} from "@ant-design/icons";
-import {Button, Card, Form, Input, message} from "antd";
-import {useLoginMutation} from "../../app/services/auth";
-import {useDispatch} from "react-redux";
-import {setCredentials} from "../../features/authSlice";
-import {useNavigate} from "react-router-dom";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Card, Form, Input, message } from "antd";
+import { useLoginMutation } from "../../app/services/auth";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../features/authSlice";
+import { useNavigate } from "react-router-dom";
 
 interface FormTypes {
   email: string;
@@ -13,28 +13,26 @@ interface FormTypes {
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const distpatch = useDispatch();
-  const [login, {isLoading, isSuccess}] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
   const onFinish = async (values: FormTypes) => {
     try {
       const res = await login(values);
-      if (isSuccess) {
-        message.success("Đăng nhập thành công");
-        distpatch(setCredentials(res));
-        navigate("/admin/category");
-      }
+      message.success("Đăng nhập thành công");
+      distpatch(setCredentials(res));
+      navigate("/admin/category");
     } catch (error: unknown) {
-      message.error(error as string);
+      message.error('Có lỗi xảy ra khi đăng nhập')
     }
   };
 
   return (
-    <div style={{backgroundColor: "#0093E9", backgroundImage: ""}}>
+    <div style={{ backgroundColor: "#0093E9", backgroundImage: "" }}>
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-cyan-400 to blue-500">
-        <Card style={{minWidth: "500px"}}>
-          <h2 className="text-center py-4">Đăng nhập</h2>
+        <Card style={{ minWidth: "500px" }}>
+          <h2 className="py-4 text-center">Đăng nhập</h2>
           <Form name="normal_login" className="login-form" onFinish={onFinish}>
-            <Form.Item name="email" rules={[{required: true, message: "Vui lòng nhập email"}]}>
+            <Form.Item name="email" rules={[{ required: true, message: "Vui lòng nhập email" }]}>
               <Input
                 size="large"
                 prefix={<UserOutlined className="site-form-item-icon" />}
@@ -43,7 +41,7 @@ const Login: React.FC = () => {
             </Form.Item>
             <Form.Item
               name="password"
-              rules={[{required: true, message: "Vui lòng nhập mật khẩu"}]}>
+              rules={[{ required: true, message: "Vui lòng nhập mật khẩu" }]}>
               <Input
                 size="large"
                 prefix={<LockOutlined className="site-form-item-icon" />}
@@ -57,7 +55,7 @@ const Login: React.FC = () => {
                 size="large"
                 type="primary"
                 htmlType="submit"
-                className="login-form-button block w-full"
+                className="block w-full login-form-button"
                 loading={isLoading}>
                 Đăng nhập
               </Button>

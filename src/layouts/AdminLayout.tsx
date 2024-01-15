@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Layout, Menu, theme } from "antd";
-import { Outlet } from "react-router-dom";
+import { Button, Layout, Menu, theme } from "antd";
+import { Link, Outlet } from "react-router-dom";
 import { adminMenus } from "../config/AdminMenu";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -30,7 +29,9 @@ const AdminLayout: React.FC = () => {
         <Header
           style={{ padding: 0, background: colorBgContainer }}
           className="flex items-center justify-end">
-          <Avatar icon={<UserOutlined />} className="mr-4" />
+          <Link to={'/'}>
+            <Button type="primary" className="mr-4">Về trang chủ</Button>
+          </Link>
         </Header>
         <Content style={{ margin: "16px" }}>
           <Outlet />
